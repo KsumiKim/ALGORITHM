@@ -20,30 +20,38 @@ public class PermutationsII {
 	}
 	
     public static List<List<Integer>> permuteUnique(int[] nums) {
+        List<List<Integer>> idxGroupList = new ArrayList<>();
+        dfs(idxGroupList, new ArrayList<>(), nums);
+        
         List<List<Integer>> result = new ArrayList<>();
-        dfs(result, new ArrayList<>(), nums, 0);
         
-        
-        
+        for (List<Integer> idxList : idxGroupList) {
+        	List<Integer> list = new ArrayList<>();
+        	
+        	for (int idx : idxList) {
+        		list.add(nums[idx]);
+        	}
+        	if (!result.contains(list)) {
+        		result.add(list);
+        	}
+        }
         
     	return result;
     }
     
-    private static void dfs(List<List<Integer>> result, List<Integer> list, int[] nums, int idx) {
+    private static void dfs(List<List<Integer>> idxGroupList, List<Integer> list, int[] nums) {
     	if (list.size() == nums.length) {
-    		if (!result.contains(list)) {
-        		result.add(new ArrayList<>(list));
-    		}
+			idxGroupList.add(new ArrayList<>(list));
     		return;
     	}
     	
     	for (int i = 0; i < nums.length; i++) {
-    		if (i == idx) continue;
-    		list.add(nums[i]);
-    		dfs(result, list, nums, i);
-    		list.remove(list.size() - 1);
+    		if (!list.contains(i)) {
+        		list.add(i);
+        		dfs(idxGroupList, list, nums);
+        		list.remove(list.size() - 1);
+    		}
     	}
-    	
     }
 
 }
