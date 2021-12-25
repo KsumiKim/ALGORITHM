@@ -12,7 +12,17 @@ public class ReorderList {
 		head.next.next.next = new ListNode(4);
 		head.next.next.next.next = new ListNode(5);
 		
-		reorderList(head);
+		ListNode head2 = new ListNode(1);
+		head2.next = new ListNode(2);
+		head2.next.next = new ListNode(3);
+		head2.next.next.next = new ListNode(4);
+		
+		reorderList(head2);
+		
+		while (head2 != null) {
+			System.out.print(head2.val + ", ");
+			head2 = head2.next;
+		}
 	}
 	
     public static void reorderList(ListNode head) {
@@ -23,21 +33,24 @@ public class ReorderList {
     		head = head.next;
     	}
     	
+    	ListNode temp = null;
+    	
     	for (int headIdx = 0; headIdx <= list.size() / 2; headIdx++) {
     		int tailIdx = list.size() - headIdx - 1;
     		
-    		if (head == null) {
-    			head = list.get(headIdx);
-        		head.next = list.get(tailIdx);
+    		if (temp == null) {
+    			temp = list.get(headIdx);
+    			head = temp;
+    			temp.next = list.get(tailIdx);
     		} else {
-    			head.next = list.get(headIdx);
+    			temp.next = list.get(headIdx);
     			if (tailIdx != headIdx) {
-        			head.next.next = list.get(tailIdx);
+    				temp.next.next = list.get(tailIdx);
+    				temp = temp.next;
     			}
     		}
-
-    		head = head.next;
+    		temp = temp.next;
     	}
-    	head.next = null;
+    	temp.next = null;
     }
 }
