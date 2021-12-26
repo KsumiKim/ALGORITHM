@@ -1,22 +1,40 @@
 package algorithm;
 
-public class BuddyString {
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
-    public boolean buddyStrings(String s, String goal) {
-        for (int i = 0; i < s.length(); i++) {
-			if (goal.indexOf(s.charAt(i)) < 0)
-				continue;
-			
-			for (int j = i + 1; j < s.length(); j++) {
-				StringBuilder sb = new StringBuilder(s);
-				sb.replace(i, i + 1, s.charAt(j) + "");
-				sb.replace(j, j + 1, s.charAt(i) + "");
-				
-				if (goal.equals(sb.toString()))
-					return true;
-			}
-		}
+public class BuddyString {
+	
+	public static void main(String[] args) {
+		String s = "aa";
+		String goal = "aa";
 		
-    	return false;
+		boolean res = buddyStrings(s, goal);
+		System.out.println(res);
+	}
+	
+    public static boolean buddyStrings(String s, String goal) {
+        if (s.length() != goal.length()) {
+        	return false;
+        }
+        
+        if (s.equals(goal)) {
+            Set<Character> set = new HashSet<>();
+            for (char c : s.toCharArray()) {
+            	set.add(c);
+            }
+        	return set.size() < s.length();
+        }
+        
+        List<Integer> diffIdxList = new ArrayList<>();
+        for (int i = 0; i < s.length(); i++) {
+        	if (s.charAt(i) != goal.charAt(i)) {
+        		diffIdxList.add(i);
+        	}
+        }
+		
+    	return diffIdxList.size() == 2 && s.charAt(diffIdxList.get(1)) == goal.charAt(diffIdxList.get(0)) && s.charAt(diffIdxList.get(0)) == goal.charAt(diffIdxList.get(1));
     }
 }
