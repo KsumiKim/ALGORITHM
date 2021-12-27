@@ -12,7 +12,7 @@ public class FlowerBed {
 		
 		
 		FlowerBed fBed = new FlowerBed();
-		boolean result = fBed.canPlaceFlower(flowerbed6, 2);
+		boolean result = fBed.canPlaceFlower4(flowerbed4, 1);
 		System.out.println(result);
 	}
 	
@@ -70,5 +70,49 @@ public class FlowerBed {
 		}
 		
 		return n == 0;
+	}
+
+
+	public boolean canPlaceFlower4(int[] flowerbed, int n) {
+		if (flowerbed.length == 1) {
+			
+			if (flowerbed[0] == 0 && n == 0) {
+				return true;
+			}
+			
+			if (flowerbed[0] == 1 && n == 0) {
+				return true;
+			}
+			
+			if (flowerbed[0] == 0 && n == 1) {
+				return true;
+			}
+		}
+		
+		int plotCnt = 0;
+		
+		for (int i = 0; i < flowerbed.length; i++) {
+			if (flowerbed[i] == 0) {
+				
+				if (i == 0 && flowerbed[i + 1] == 0) {
+					plotCnt++;
+					flowerbed[i] = 1;
+					continue;
+				}
+				
+				if (i == flowerbed.length - 1 &&  flowerbed[i - 1] == 0) {
+					plotCnt++;
+					flowerbed[i] = 1;
+					continue;
+				}
+				
+				if (i > 0 && flowerbed[i - 1] == 0 && i < flowerbed.length - 1 && flowerbed[i + 1] == 0) {
+					plotCnt++;
+					flowerbed[i] = 1;
+				}
+			}
+		}
+		
+		return plotCnt >= n;
 	}
 }
