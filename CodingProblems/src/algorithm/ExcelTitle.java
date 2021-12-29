@@ -24,4 +24,25 @@ public class ExcelTitle {
 
     	return sb.reverse().toString();
     }
+    
+    public String convertToTitle2(int columnNumber) {
+    	int[] titleArr = new int[26];
+    	
+    	StringBuilder sb = new StringBuilder();
+    	
+    	while (columnNumber > 26) {
+    		
+    		int val = columnNumber / 26;
+    		int mod = columnNumber % 26;
+    		
+    		if (val > 1) {
+        		sb.append((char)titleArr[val] + 65);
+    		}
+    		sb.append((char)titleArr[mod] + 65);
+    		columnNumber /= 26;
+    	}
+    	
+    	return sb.toString();
+    }
+    
 }
