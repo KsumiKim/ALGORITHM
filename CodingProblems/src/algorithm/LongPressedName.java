@@ -44,22 +44,24 @@ public class LongPressedName {
     	return true;
     }
     
-    public boolean isLongPressed(String name, String typed) {
-        StringBuilder sb = new StringBuilder();
+    public static boolean isLongPressed(String name, String typed) {
+    	StringBuilder sb = new StringBuilder(typed);
     	
-    	for (int i = 0, nameIdx = 0; i < typed.length(); i++) {
+    	for (int i = 0; i < name.length(); i++) {
     		
-    		if  (nameIdx > 0 && name.charAt(nameIdx) != typed.charAt(i) && name.charAt(nameIdx - 1) == typed.charAt(i)) 
-    			continue;
-    		
-    		if (name.charAt(nameIdx) == typed.charAt(i)) {
-    			nameIdx++;
-    			sb.append(typed.charAt(i));
-    		} 
-
-    		if (name.equals(sb.toString()))
-    			return true;
+    		if (sb.length() > 0 && name.charAt(i) == sb.charAt(0)) {
+				sb.deleteCharAt(0);
+    			
+    			if (i == name.length() - 1 || name.charAt(i) != name.charAt(i + 1)) {
+        			while (sb.length() > 0 && name.charAt(i) == sb.charAt(0)) {
+        				sb.deleteCharAt(0);
+        			}
+    			}
+    		} else {
+    			return false;
+    		}
     	}
-    	return false;
+    	
+    	return sb.length() == 0;
     }
 }
