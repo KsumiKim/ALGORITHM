@@ -7,7 +7,10 @@ public class NumberAndDouble {
 	
 	public static void main(String[] args) {
 		int[] arr = {-20, 8, -6, -14, 0, -19, 14, 4};
-		boolean res = checkIfExist2(arr);
+		
+		int[] arr2 = {10, 2, 5, 3};
+		
+		boolean res = checkIfDoubleExists(arr);
 		System.out.println(res);
 	}
 
@@ -50,5 +53,21 @@ public class NumberAndDouble {
     		set.add(num);
     	}
     	return result;
+    }
+
+ // using nested for loop II
+    public static boolean checkIfDoubleExists(int[] arr) {
+    	
+    	for (int i = 0; i < arr.length; i++) {
+    		int target = arr[i] << 1;
+    		
+    		for (int j = 0; j < arr.length; j++) {
+    			if (i != j && arr[j] == target) {
+    				return true;
+    			}
+    		}
+    	}
+    	
+    	return false;
     }
 }
