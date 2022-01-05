@@ -1,5 +1,8 @@
 package algorithm;
 
+import java.util.HashSet;
+import java.util.Set;
+
 public class PerfectNumber {
 
 	public static void main(String[] args) {
@@ -26,5 +29,23 @@ public class PerfectNumber {
     	}
     	
     	return result == num;
+    }
+
+    
+    public boolean checkPerfectNumber(int num) {
+    	Set<Integer> set = new HashSet<>();
+    	int sum = 0;
+    	
+    	int i = 1;
+    	
+    	while(i < num / 2) {
+    		
+    		if (num % i == 0) {
+    			set.add(i);
+    			set.add(num / i);
+    			sum += i + (num / i);
+    		}
+    	}
+    	return sum == num;
     }
 }
