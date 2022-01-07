@@ -9,7 +9,7 @@ public class PalindromeII {
 		String s4 = "tebbem";
 		String s5 = "acbca";
 		
-		boolean res = validPalindrome(s5);
+		boolean res = isValidPalindrome(s4);
 		System.out.println(res);
 	}
 
@@ -32,5 +32,19 @@ public class PalindromeII {
     	StringBuilder sb = new StringBuilder(s.substring(s.length() / 2 + pointIdx));
     	
     	return leftHalf.equals(sb.reverse().toString());
+    }
+
+    private static boolean isValidPalindrome(String s) {
+    	
+    	for (int i = 0; i < s.length(); i++) {
+        	StringBuilder sb = new StringBuilder(s);
+        	sb.deleteCharAt(i);
+        	String temp = sb.toString();
+        	
+    		if (temp.equals(sb.reverse().toString())) {
+    			return true;
+    		}
+    	}
+    	return false;
     }
 }
