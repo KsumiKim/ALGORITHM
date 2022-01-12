@@ -6,9 +6,10 @@ public class RepeatingSubstring {
 		String sequence = "ababc", word = "ab";
 		String sequence2 = "ababc", word2 = "ba";
 		String sequence3 = "ababc", word3 = "ac";
-		
-		
-		int res = maxRepeating(sequence3, word3);
+		String sequence4 = "aaabaaaabaaabaaaabaaaabaaaabaaaaba", word4 = "aaaba";
+		// aaabaaaabaaabaaaabaaaabaaaabaaaaba
+
+		int res = maxRepeating2(sequence4, word4);
 		System.out.println(res);
 	}
 	/*
@@ -32,5 +33,17 @@ public class RepeatingSubstring {
     	}
     	
     	return res;
+    }
+
+    
+    public static int maxRepeating2(String sequence, String word) {
+    	StringBuilder sb = new StringBuilder(word);
+    	int count = 0;
+    	
+    	while (sequence.indexOf(sb.toString()) >= 0) {
+    		sb.append(word);
+    		count++;
+    	}
+    	return count;
     }
 }
