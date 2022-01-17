@@ -6,8 +6,9 @@ public class ValidParentheses2 {
 
 	public static void main(String[] args) {
 		String s = "({[)";
+		String s2 = "()[]{}";
 		
-		boolean res = isValid(s);
+		boolean res = isValid2(s2);
 		System.out.println(res);
 	}
 	
@@ -36,5 +37,34 @@ public class ValidParentheses2 {
     		stack.push(curr);
     	}
     	return stack.isEmpty();
+    }
+
+    
+    public static boolean isValid2(String s) {
+    	Stack<Character> stack = new Stack<>();
+    	
+    	for (int i = 0; i < s.length(); i++) {
+    		
+    		if (s.charAt(i) == '(' || s.charAt(i) == '{' || s.charAt(i) == '[') {
+    			stack.push(s.charAt(i));
+    			continue;
+    		}
+    		
+    		while (!stack.isEmpty()) {
+    			
+    			if (stack.peek() == '(' && s.charAt(i) != ')') {
+    				return false;
+    			}
+    			if (stack.peek() == '{' && s.charAt(i) != '}') {
+    				return false;
+    			}
+    			if (stack.peek() == '[' && s.charAt(i) != ']') {
+    				return false;
+    			}
+    			stack.pop();
+    		}
+    	}
+    	
+    	return true;
     }
 }
