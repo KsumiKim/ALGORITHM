@@ -2,14 +2,19 @@ package algorithm;
 
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Set;
 
 public class SetMismatch {
 
 	public static void main(String[] args) {
 		int[] nums = {2, 2};
+		int[] nums2 = {1, 2, 2, 4};
+		int[] nums3 = {1, 1};
+		int[] nums4 = {2, 3, 3, 4, 5, 6};
 		
 		SetMismatch setMismatch = new SetMismatch();
-		int[] res = setMismatch.findErrorNums(nums);
+		int[] res = setMismatch.findErrorNums4(nums4);
 		
 		for (int n : res)
 			System.out.println(n);
@@ -80,5 +85,33 @@ public class SetMismatch {
     	}
     	
     	return new int[] {dup, nums[nums.length - 1] != nums.length ? nums.length : missing};
+    }
+
+    
+    public int[] findErrorNums4(int[] nums) {
+    	int[] res = new int[2];
+    	int max = nums.length;
+    	Arrays.sort(nums);
+    	Set<Integer> set = new HashSet<>();
+    	
+    	for (int i = 0, j = 1; i < max; i++, j++) {
+    		
+    		if (set.contains(nums[i])) {
+        			res[0] = nums[i];
+        			continue;
+        		}
+        		
+    		set.add(nums[i]);
+    		
+    		if (!set.contains(j)) {
+    			res[1] = j;
+    		}
+    		
+    		if (res[0] > 0 && res[1] > 0) {
+    			break;
+    		}
+    	}
+    	
+    	return res;
     }
 }
