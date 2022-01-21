@@ -10,7 +10,7 @@ public class LatestTime {
 		String time5 = "?0:15";
 		String time6 = "??:3?";
 
-		String res = maximumTime(time6);
+		String res = maximumTime2(time);
 		System.out.println(res);
 	}
 	
@@ -41,6 +41,40 @@ public class LatestTime {
     		if (i == 4) 
 				sb.setCharAt(i, '9');
     	}
+    	return sb.toString();
+    }
+
+
+    
+    public static String maximumTime2(String time) {
+    	StringBuilder sb = new StringBuilder(time);
+    	
+    	if (sb.charAt(0) == '?') {
+    		
+    		if (sb.charAt(1) != '?' && Integer.parseInt(sb.charAt(1) + "") > 3) {
+    			sb.setCharAt(0, '1');
+    		} else {
+    			sb.setCharAt(0, '2');
+    		}
+    	}
+    	
+    	if (sb.charAt(1) == '?') {
+    		
+    		if (sb.charAt(0) == '2') {
+    			sb.setCharAt(1, '3');
+    		} else {
+    			sb.setCharAt(1, '9');
+    		}
+    	}
+    	
+    	if (sb.charAt(3) == '?') {
+    		sb.setCharAt(3, '5');
+    	}
+    	
+    	if (sb.charAt(4) == '?') {
+    		sb.setCharAt(4, '9');
+    	}
+    	
     	return sb.toString();
     }
 }
