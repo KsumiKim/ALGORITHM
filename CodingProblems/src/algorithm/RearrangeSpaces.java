@@ -6,10 +6,11 @@ import java.util.List;
 public class RearrangeSpaces {
 
 	public static void main(String[] args) {
-		String text = "a";
+		String text = " practice   makes   perfect";
 		String text2 = "   hello";
+		String text3 = "  this   is  a sentence ";
 		
-		String res = reorderSpaces(text2);
+		String res = reorderSpaces2(text2);
 		System.out.println(res);
 	}
 	// Rearrange the spaces so that there is an equal number of spaces 
@@ -55,5 +56,32 @@ public class RearrangeSpaces {
     		res.append(" ");
     	
     	return res.toString();
+    }
+
+    
+    public static String reorderSpaces2(String text) {
+    	String[] strArr = text.trim().split("\\s+");
+    	int spaceTotalCnt = 0;
+    	
+    	for (char c : text.toCharArray()) {
+    		if ((int)c == 32) {
+    			spaceTotalCnt++;
+    		}
+    	}
+    	int spaceCnt = strArr.length > 1 ? spaceTotalCnt / (strArr.length - 1) : 0;
+    	int trailingSpaceCnt = strArr.length > 1 ? spaceTotalCnt % (strArr.length - 1) : spaceTotalCnt;
+
+    	StringBuilder sb = new StringBuilder();
+    	
+    	for (int i = 0; i < strArr.length; i++) {
+    		sb.append(strArr[i]);
+    		
+    		int j = i < strArr.length - 1 ? spaceCnt : trailingSpaceCnt;
+    		while (j-- > 0) {
+    			sb.append(" ");
+    		}
+    	}
+    	
+    	return sb.toString();
     }
 }
