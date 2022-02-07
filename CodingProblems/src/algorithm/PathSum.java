@@ -15,7 +15,7 @@ public class PathSum {
 		root.right.right = new TreeNode(4);
 		root.right.right = new TreeNode(1);
 		
-		System.out.println(hasPathSum(root, 22));
+		System.out.println(addsToTargetSum(root, 22));
 	}
 	 
     public static boolean hasPathSum(TreeNode root, int targetSum) {
@@ -35,5 +35,25 @@ public class PathSum {
     		rightContains = helper(node.right, targetSum, currentSum + node.val);
     	
     	return leftContains || rightContains;
+    }
+
+
+    public static boolean addsToTargetSum(TreeNode root, int targetSum) {
+    	if (root == null)
+    		return false;
+    	
+    	return hasTargetSum(root, 0, targetSum);
+    }
+    
+    private static boolean hasTargetSum(TreeNode node, int curr, int target) {
+    	if (node == null) {
+    		return false;
+    	}
+    	
+    	if (node.left == null && node.right == null) {
+    		return node.val + curr == target;
+    	}
+    	
+    	return hasTargetSum(node.left, curr + node.val, target) || hasTargetSum(node.right, curr + node.val, target);
     }
 }
