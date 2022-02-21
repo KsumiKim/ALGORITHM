@@ -6,8 +6,17 @@ public class BackspaceString {
 		String S = "e##e#o##oyof##q";
 		String T = "e##e#fq##o##oyof##q";
 		
+		String S2 = "ab#c";
+		String T2 = "ad#c";
+		
+		String S3 = "ab##";
+		String T3 = "c#d#";
+		
+		String S4 = "a#c";
+		String T4 = "b";
+		
 		BackspaceString bString = new BackspaceString();
-		boolean res = bString.backspaceCompare(S, T);
+		boolean res = bString.backspaceCompare2(S4, T4);
 		System.out.println(res);
 	}
 	
@@ -35,5 +44,29 @@ public class BackspaceString {
     	}
     	
     	return sbForS.toString().contentEquals(sbForT.toString());
+    }
+
+
+    public boolean backspaceCompare2(String s, String t) {
+    	String processedS = getStringInTextEditor(s);
+    	String processedT = getStringInTextEditor(t);
+    	
+    	return processedS.equals(processedT);
+    }
+    
+    private String getStringInTextEditor(String s) {
+    	StringBuilder sb = new StringBuilder(s);
+    	int idx = sb.indexOf("#");
+    	
+    	while (idx >= 0) {
+
+    		sb.deleteCharAt(idx);
+    		if (idx > 0) {
+    			sb.deleteCharAt(idx - 1);
+    		}
+    		idx = sb.indexOf("#");
+    	}
+    	
+    	return sb.toString();
     }
 }
