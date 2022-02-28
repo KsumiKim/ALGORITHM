@@ -17,8 +17,26 @@ public class TownJudge {
 				{4, 3}
 				};
 		
+		int N2 = 3;
+		int[][] trust2 = {
+				{1, 3},
+				{2, 3},
+				{3, 1}
+				};
+		
+		int N3 = 3;
+		int[][] trust3 = {
+				{1, 3},
+				{2, 3}
+				};
+		
+		int N4 = 2;
+		int[][] trust4 = {
+				{1, 2}
+				};
+		
 		TownJudge townJudge = new TownJudge();
-		int res = townJudge.findJudge2(N, trust);
+		int res = townJudge.getJudge(N4, trust4);
 		System.out.println(res);
 	}
 	
@@ -52,19 +70,21 @@ public class TownJudge {
     	return judge;
     }
     
-    public int findJudge2(int N, int[][] trust) {
+    
+    public int getJudge(int n, int[][] trust) {
+        int[] arr = new int[10000];
+        Set<Integer> set = new HashSet<>();
+        
+        for (int[] label : trust) {
+        	set.add(label[1]);
+        	arr[label[1]]++;
+        	
+        	if (arr[label[0]] > 0) {
+        		set.remove(label[0]);
+        	}
+        }
+        int res = set.toArray(new Integer[1])[0];
     	
-    	int[] count = new int[N + 1];
-    	
-    	for (int[] pair : trust) {
-    		count[pair[0]]--;
-    		count[pair[1]]++;
-    	}
-    	
-    	for (int i = 1; i < N + 1; i++) 
-    		if (count[i] == N - 1)
-    			return i;
-    	
-    	return -1;
+    	return set.size() == 1 && arr[res] == trust.length ? res : -1;
     }
 }
