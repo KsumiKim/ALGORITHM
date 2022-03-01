@@ -3,8 +3,20 @@ package algorithm;
 public class ReverseStringII {
 
 	public static void main(String[] args) {
+		String s = "abcdefg";
+		int k = 2;
+		
+		String s2 = "abcde";
+		int k2 = 2;
+		
+		String s3 = "abcd";
+		int k3 = 2;
+		
+		String s4 = "abcd";
+		int k4 = 4;
+		
 		ReverseStringII reverse = new ReverseStringII();
-		String result = reverse.reverseString("abcde", 2);
+		String result = reverse.reverseStr(s, k);
 		System.out.println(result);
 	}
 	
@@ -31,4 +43,20 @@ public class ReverseStringII {
 		}
 		return new String(strToCharStr);
 	}
+
+	
+    public String reverseStr(String s, int k) {
+    	StringBuilder sb = new StringBuilder(s);
+    	
+    	for (int i = 0; i < sb.length(); i++) {
+    		
+    		if (i % (k * 2) == 0) {
+    			int endIdx = i + k > sb.length() ? sb.length() : i + k;
+        		StringBuilder substr = new StringBuilder(sb.substring(i, endIdx));
+        		substr.reverse();
+        		sb.replace(i, i + k, substr.toString());
+    		}
+    	}
+    	return sb.toString();
+    }
 }
