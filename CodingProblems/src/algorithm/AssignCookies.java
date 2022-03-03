@@ -18,7 +18,7 @@ public class AssignCookies {
 		int[] s4 = {5, 6, 7, 8};
 
 		
-		int res = findContentChildren(g4, s4);
+		int res = findContentChildren2(g4, s4);
 		System.out.println(res);
 	}
 	/*
@@ -44,5 +44,26 @@ public class AssignCookies {
     		j--;
     	}
     	return contentChildren;
+    }
+
+    
+    public static int findContentChildren2(int[] g, int[] s) {
+    	Arrays.sort(g);
+    	Arrays.sort(s);
+    	int idx = 0;
+    	int count = 0;
+    	
+    	for (int i = 0; i < g.length; i++) {
+    		
+    		for (int j = idx; j < s.length; j++) {
+    			if (s[j] >= g[i]) {
+    				idx = j;
+    				count++;
+    				break;
+    			}
+    		}
+    	}
+    	
+    	return count;
     }
 }
