@@ -4,7 +4,7 @@ public class OddNumbers {
 
 	public static void main(String[] args) {
 		int low = 14, high = 17;
-		int res = countOdds(low, high);
+		int res = countOdds2(low, high);
 		System.out.println(res);
 	}
 	
@@ -19,7 +19,14 @@ public class OddNumbers {
     	return count;
     }
     
-    public static int countOdds2(int low, int high) {	
-    	return low % 2 == 0 ? (high - low) / 2 : (high - low) / 2 + 1;
+    public static int countOdds2(int low, int high) {
+    	int oddNumber = low % 2 == 0 ? low + 1 : low;
+    	int count = 0;
+    	
+    	while (oddNumber <= high) {
+    		count++;
+    		oddNumber += 2;
+    	}
+    	return count;
     }
 }
