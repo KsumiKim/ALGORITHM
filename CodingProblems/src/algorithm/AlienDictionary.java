@@ -1,7 +1,9 @@
 package algorithm;
 
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.PriorityQueue;
 
 public class AlienDictionary {
 
@@ -9,8 +11,12 @@ public class AlienDictionary {
 		String[] words = {"apple", "app"};
 		String order = "abcdefghijklmnopqrstuvwxyz";
 		
+		String[] words2 = {"hello","leetcode"};
+		String order2 = "hlabcdefgijkmnopqrstuvwxyz";
+		
+		
 		AlienDictionary aDictionary = new AlienDictionary();
-		boolean res = aDictionary.isAlienSorted(words, order);
+		boolean res = aDictionary.isAlienSorted2(words, order);
 		System.out.println(res);
 	}
 	
@@ -61,4 +67,48 @@ public class AlienDictionary {
     	
     	return true;
     }
+    
+    public boolean isAlienSorted2(String[] words, String order) {
+    	PriorityQueue<String> queue = new PriorityQueue<>(new StringComparator(order))  ;
+    	
+    	for (String word : words) {
+    		queue.add(word);
+    	}
+    	
+    	for (String word : words) {
+    		if (!word.equals(queue.poll())) {
+    			return false;
+    		}
+    	}
+    	return true;
+    }
+    
+    class StringComparator implements Comparator<String> {
+    	String order;
+    	
+    	public StringComparator(String order) {
+    		this.order = order;
+    	}
+    	
+		@Override
+		public int compare(String s1, String s2) {
+			int i = 0;
+			int j = 0;
+			  
+			while (i < s1.length() - 1 && j < s2.length() - 1) {
+				  int idx1 = order.indexOf(s1.charAt(i));
+				  int idx2 = order.indexOf(s2.charAt(j));
+				  
+				  if (idx1 < idx2) {
+					  return -1;
+				  } else if (idx1 > idx2) {
+					  return 1;
+				  }
+				  i++;
+				  j++;
+			}
+		    return i == s1.length() - 1? -1 : 1;
+		}
+	}
+
 }
