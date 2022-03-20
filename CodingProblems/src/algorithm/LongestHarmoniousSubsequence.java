@@ -1,7 +1,8 @@
 package algorithm;
 
-import java.util.Arrays;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 public class LongestHarmoniousSubsequence {
 
@@ -9,7 +10,7 @@ public class LongestHarmoniousSubsequence {
 		int[] nums = {1,3,2,2,5,2,3,7};
 		
 		LongestHarmoniousSubsequence LHS = new LongestHarmoniousSubsequence();
-		int result = LHS.findLHS(nums);
+		int result = LHS.findLHS2(nums);
 		System.out.println(result);
 	}
 	
@@ -33,4 +34,38 @@ public class LongestHarmoniousSubsequence {
 		}
 		return keyCount;
 	}
+
+	
+    public int findLHS2(int[] nums) {
+    	int res = 0;
+    	
+    	for (int i = 0; i < nums.length; i++) {
+    		int min = nums[i];
+    		int max = nums[i];
+    		List<Integer> subsequence = new ArrayList<>();
+    		subsequence.add(nums[i]);
+    		
+    		for (int j = 0; j < nums.length; j++) {
+    			if (j == i) {
+    				continue;
+    			}
+    			
+    			if (Math.abs(nums[j] - min) > 1 || Math.abs(nums[j] - max) > 1) {
+    				continue;
+    			}
+    			
+    			if (nums[j] > max) {
+    				max = nums[j];
+    			}
+    			
+    			if (nums[j] < min) {
+    				min = nums[j];
+    			}
+    			
+    			subsequence.add(nums[j]);
+    		}
+    		res = Math.max(res, subsequence.size());
+    	}
+    	return res;
+    }
 }
