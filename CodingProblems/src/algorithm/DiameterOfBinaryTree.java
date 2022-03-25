@@ -10,9 +10,8 @@ public class DiameterOfBinaryTree {
 		root.left.right = new TreeNode(5);
 		root.left.right.right = new TreeNode(6);
 		
-		
 		DiameterOfBinaryTree diameter = new DiameterOfBinaryTree();
-		int result = diameter.diameterOfBinaryTree(root);
+		int result = diameter.diameterOfBinaryTree2(root);
 		System.out.println(result);
 		
 	}
@@ -40,4 +39,23 @@ public class DiameterOfBinaryTree {
     		return depth;
     	return Math.max(getDepth(node.left, depth + 1), getDepth(node.right, depth + 1));
     }
+
+    public int diameterOfBinaryTree2(TreeNode root) {
+    	int left = getLevel(root.left, 0);
+    	int right = getLevel(root.right, 0);
+    	
+    	return left + right;
+    }
+    
+    private int getLevel(TreeNode node, int level) {
+    	if (node == null) {
+    		return level;
+    	}
+    	
+    	int leftLevel = getLevel(node.left, level + 1);
+    	int rightLevel = getLevel(node.right, level + 1);
+    	
+    	return Math.max(leftLevel, rightLevel);
+    }
+    
 }
