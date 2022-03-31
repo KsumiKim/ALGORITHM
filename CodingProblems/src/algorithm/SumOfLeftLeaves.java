@@ -1,5 +1,8 @@
 package algorithm;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class SumOfLeftLeaves {
 
 	public static void main(String[] args) {
@@ -20,26 +23,6 @@ public class SumOfLeftLeaves {
 		
 	}
 	
-	public static int getSum(TreeNode root) {
-		
-		if (root == null)
-			return 0;
-	
-		int sum = 0;
-		
-		if (root.left != null) {
-			
-			if (root.left.left == null && root.left.right == null)
-				sum += root.left.val;
-			else 
-				sum += getSum(root.left);
-		}
-		sum += getSum(root.right);
-		
-		return sum;
-	}
-
-	
     public static int sumOfLeftLeaves(TreeNode root) {
     	
     	return helper(root, false);
@@ -56,5 +39,30 @@ public class SumOfLeftLeaves {
     	int right = helper(node.right, false);
     	
     	return left + right;
+    }
+
+    public int sumOfLeftLeaves2(TreeNode root) {
+        List<Integer> list = new ArrayList<>();
+    	helper2(root, false, list);
+    	int sum = 0;
+    	
+    	for (int n : list) {
+    		sum += n;
+    	}
+    	
+    	return sum;
+    }
+    
+    private void helper2(TreeNode node, boolean isLeft, List<Integer> list) {
+    	if (node == null)
+    		return;
+    	
+    	if (isLeft && node.left == null) {
+    		list.add(node.val);
+    	}
+    	
+    	helper2(node.left, true, list);
+    	helper2(node.right, false, list);
+    	
     }
 }
