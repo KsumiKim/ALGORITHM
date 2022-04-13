@@ -3,8 +3,14 @@ package algorithm;
 public class DetectCapital {
 
 	public static void main(String[] args) {
+		String word = "Google";
+		String word2 = "USA";
+		String word3 = "FlaG";
+		String word4 = "leetcode";
+		String word5 = "ffffffffffffffffffffF";
+		
 		DetectCapital cap = new DetectCapital();
-		boolean result = cap.canDetectCapital("Google");
+		boolean result = cap.detectCapitalUse(word);
 		System.out.println(result);
 	}
 	
@@ -24,4 +30,24 @@ public class DetectCapital {
 		
 		return capCount == 0 || capCount == str.length() || (capCount == 1 && 'Z' - str.charAt(0) >= 0);
 	}
+
+    public boolean detectCapitalUse(String word) {
+        boolean isAllCap = true;
+        boolean isAllLow = true;
+        boolean isCamel = true;
+        
+        for (int i = 0; i < word.length(); i++) {
+        	char curr = word.charAt(i);
+        	if (Character.isUpperCase(curr)) {
+        		isAllLow = false;
+        	} 
+        	if (i > 0 && Character.isUpperCase(curr)) {
+        		isCamel = false;
+        	} 
+        	if (Character.isLowerCase(curr)) {
+        		isAllCap = false;
+        	}
+        }
+    	return isAllCap || isAllLow || isCamel;
+    }
 }
