@@ -6,7 +6,13 @@ import java.util.HashMap;
 public class RansomNote {
 
 	public static void main(String[] args) {
-		System.out.println(canConstruct2("ab", "aab"));
+		String ransomeNote = "a";
+		String magazine = "b";
+		
+		String ransomeNote2 = "aa";
+		String magazine2 = "ab";
+		
+		System.out.println(canConstruct3(ransomeNote2, magazine2));
 	}
 	
 	// #1 : using map to store frequency
@@ -60,4 +66,16 @@ public class RansomNote {
         
         return remaining == 0;
 	}
+
+    public static boolean canConstruct3(String ransomNote, String magazine) {
+        StringBuilder mz = new StringBuilder(magazine);
+        
+        for (char c : ransomNote.toCharArray()) {
+        	if (mz.indexOf(c + "") < 0) {
+        		return false;
+        	}
+        	mz.deleteCharAt(mz.indexOf(c + ""));
+        }
+    	return true;
+    }
 }
