@@ -4,7 +4,9 @@ public class GreatString {
 
 	public static void main(String[] args) {
 		String s = "s";
-		String res = makeGood(s);
+		String s2 = "leEeetcode";
+		String s3 = "abBAcC";
+		String res = makeGood2(s3);
 		System.out.println(res);
 	}
 	// To make the string good, you can choose two adjacent characters 
@@ -33,6 +35,29 @@ public class GreatString {
     		}
     	}
     	
+    	return sb.toString();
+    }
+
+    
+    public static String makeGood2(String s) {
+    	StringBuilder sb = new StringBuilder(s);
+
+    	while (true) {
+    		boolean isGood = true;
+    		
+    		for (int i = 0; i < sb.length() - 1; i++) {
+    			char curr = sb.charAt(i);
+    			char next = sb.charAt(i + 1);
+    			
+    			if (curr != next && (Character.toLowerCase(curr) == next || Character.toUpperCase(curr) == next)) {
+    				sb.delete(i, i + 2);
+    				isGood = false;
+    			}
+    		}
+    		if (isGood) {
+        		break;
+    		}
+    	}
     	return sb.toString();
     }
 }
