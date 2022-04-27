@@ -17,8 +17,8 @@ public class LowestCommonAncestor {
 		root.right.left = new TreeNode(7);
 		root.right.right = new TreeNode(9);
 		
-		TreeNode p = new TreeNode(2);
-		TreeNode q = new TreeNode(7);
+		TreeNode p = root.left;
+		TreeNode q = root.right;
 		
 		TreeNode root2 = new TreeNode(3);
 		root2.left = new TreeNode(1);
@@ -28,8 +28,20 @@ public class LowestCommonAncestor {
 		TreeNode p2 = new TreeNode(3);
 		TreeNode q2 = new TreeNode(2);
 		
+		TreeNode root3 = new TreeNode(2);
+		root3.left = new TreeNode(1);
 		
-		TreeNode result = lowestCommonAncestorTree(root, p, q);
+		TreeNode p3 = new TreeNode(2);
+		TreeNode q3 = new TreeNode(1);
+
+		TreeNode root4 = new TreeNode(2);
+		root4.left = new TreeNode(1);
+		root4.right = new TreeNode(3);
+		
+		TreeNode p4 = root4.right;
+		TreeNode q4 = root4.left;
+
+		TreeNode result = lowestCommonAncestorOfBST(root4, p4, q4);
 		
 		System.out.println(result.val);
 	}
@@ -86,5 +98,28 @@ public class LowestCommonAncestor {
     	list.add(node);
     	helper(node.left, target, list);
     	helper(node.right, target, list);
+    }
+
+    
+    public static TreeNode lowestCommonAncestorOfBST(TreeNode root, TreeNode p, TreeNode q) {
+        TreeNode[] lca = new TreeNode[1];
+        traverse(root, p, q, lca);
+    	return lca[0];
+    }
+    
+    private static TreeNode traverse(TreeNode node, TreeNode p, TreeNode q, TreeNode[] lca) {
+    	if (node == null) {
+    		return node;
+    	}
+    	
+    	TreeNode left = traverse(node.left, p, q, lca);
+    	TreeNode right = traverse(node.right, p, q, lca);
+    	
+    	if ((left == p && right == q) || (left == q && right == p) || (left == p && node == q) || (node == p && left == q) || 
+   			(right == p && node == q) || (node == p && right== q)) {
+    		lca[0] = node;
+    	}
+    	
+    	return node;
     }
 }
