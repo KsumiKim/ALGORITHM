@@ -39,4 +39,34 @@ public class StringFromBinaryTree {
     		sb.append(")");
     	}
     }
+
+    
+    public String binaryTreeToString(TreeNode root) {
+    	StringBuilder sb = new StringBuilder();
+    	construct(root, sb);
+    	return sb.toString();
+    }
+    
+    private void construct(TreeNode node, StringBuilder sb) {
+    	if (node == null) {
+    		return;
+    	}
+    	
+    	sb.append(node.val);
+    	if (node.left != null) {
+    		sb.append("(");
+    		construct(node.left, sb);
+    		sb.append(")");
+    	}
+    	
+    	if (node.right != null) {
+    		if (node.left == null) {
+    			sb.append("()");
+    		}
+    		sb.append("(");
+    		construct(node.right, sb);
+    		sb.append(")");
+    	}
+    	
+    }
 }
