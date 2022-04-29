@@ -6,7 +6,8 @@ public class StringSplitter {
 
 	public static void main(String[] args) {
 		String s = "00110001011111100111101010100010001101001110";
-		int res = maxAfterSplit(s);
+		String s2 = "011101";
+		int res = maxScore(s);
 		System.out.println(res);
 	}
 	/*
@@ -17,34 +18,16 @@ public class StringSplitter {
 	 * substring plus the number of ones in the right substring.
 	 */
     public static int maxScore(String s) {
-    	StringBuilder sb = new StringBuilder(s);
-    	int max = 0, totalBitCount = Integer.bitCount(Integer.parseInt(s, 2)), len = s.length();
+    	int zeroCount = 0, oneCount = 0, max = 0;
     	
-    	while (len-- > 1) {
-    		int bCount = Integer.bitCount(Integer.parseInt(sb.toString(), 2) >> 1);
-    		int left = len - bCount;
-    		int right = totalBitCount - bCount;
-    		max = Math.max(max, left + right);
-    		sb.deleteCharAt(sb.length() - 1);
+    	for (int i = 0; i < s.length(); i++) {
+    		if (s.charAt(i) == '0') {
+    			zeroCount++;
+    		} else {
+    			oneCount++;
+    		}
+    		max = Math.max(max, zeroCount - oneCount);
     	}
-    	
-    	return max;
-    }
-    
-    public static int maxAfterSplit(String s) {
-    	BigInteger strToInt = new BigInteger(s);
-		int totalBitCount = strToInt.bitCount();
-		int max = 0;
-		
-    	for (int i = 1; i < s.length(); i++) {
-    		String currStr = s.substring(0, i);
-        	BigInteger b = new BigInteger(currStr);
-    		int currBitCount = b.bitCount();
-    		int left = currStr.length() - currBitCount;
-    		int right = totalBitCount - currBitCount;
-    		max = Math.max(max, left + right);
-    	}
-    	
-    	return max;
+    	return max + oneCount;
     }
 }
