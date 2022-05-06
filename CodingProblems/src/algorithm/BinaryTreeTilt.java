@@ -10,8 +10,15 @@ public class BinaryTreeTilt {
 		root.left = new TreeNode(2);
 		root.right = new TreeNode(3);
 		
+		TreeNode root2 = new TreeNode(4);
+		root2.left = new TreeNode(2);
+		root2.right = new TreeNode(9);
+		root2.left.left = new TreeNode(3);
+		root2.left.right = new TreeNode(5);
+		root2.right.right = new TreeNode(7);
+		
 		BinaryTreeTilt bTreeTilt = new BinaryTreeTilt();
-		int result = bTreeTilt.findTile(root);
+		int result = bTreeTilt.findTilt(root2);
 		System.out.println(result);
 		
 	}
@@ -47,22 +54,24 @@ public class BinaryTreeTilt {
 		return node.val;
 	}
 
-	
-	public int findTilt(TreeNode root) {
-		int[] sum = new int[1];
-		helper(root, sum);
-		return sum[0];
-	}
-	
-	private int helper(TreeNode node, int[] sum) {
-		if (node == null)
-			return 0;
-		
-		int leftValue = helper(node.left, sum);
-		int rightValue = helper(node.right, sum);
-		
-		sum[0] += Math.abs(leftValue - rightValue);
-		
-		return leftValue + rightValue + node.val;
-	}
+    public int findTilt(TreeNode root) {
+    	int[] sum = new int[1];
+    	traverse(root, sum);
+        return sum[0];
+    }
+    
+    private int traverse(TreeNode node, int[] sum) {
+    	if (node == null) {
+    		return 0;
+    	}
+    	
+    	int left = traverse(node.left, sum);
+    	int right = traverse(node.right, sum);
+    	int original = node.val;
+    	
+    	node.val = Math.abs(left - right);
+    	sum[0] += node.val;
+    	
+        return left + right + original;
+    }
 }
