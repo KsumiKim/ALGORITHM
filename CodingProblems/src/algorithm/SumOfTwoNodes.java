@@ -38,55 +38,20 @@ public class SumOfTwoNodes {
 		helper(node.right, list);
 	}
 	
-	// #2. With a list but using while instead of nested for statement
-	public boolean findTarget2(TreeNode node, int target) {
-		
-		if (node == null)
+	public boolean findTarget2(TreeNode root, int target) {
+		return helper(root, target, new ArrayList<>());
+	}
+	
+	private boolean helper(TreeNode node, int target, List<Integer> list) {
+		if (node == null) {
 			return false;
-		
-		List<Integer> list = new ArrayList<>();
-		
-		helper(node, list);
-		
-		int l = 0, r = list.size() - 1;
-		
-		while (r > l) {
-			
-			int sum = list.get(r) + list.get(l);
-			
-			if (sum == target)
-				return false;
-			
-			if (sum > target)
-				r--;
-			else 
-				l++;
 		}
 		
-		return false;
-	}
-	
-	// #3. Using set 
-	public boolean findTarget3(TreeNode root, int k) {
-		
-		if (root == null)
-			return false;
-		
-		HashSet<Integer> set = new HashSet<>();
-		
-		return find(root, k, set);
-	}
-	
-	private boolean find(TreeNode node, int k, HashSet<Integer> set) {
-		
-		if (node == null)
-			return false;
-		
-		if (set.contains(k - node.val))
+		if (list.contains(target - node.val)) {
 			return true;
+		}
 		
-		set.add(node.val);
-		
-		return find(node.left, k, set) || find(node.right, k, set);
+		list.add(node.val);
+		return helper(node.left, target, list) || helper(node.right, target, list);
 	}
 }
