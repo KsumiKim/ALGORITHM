@@ -12,7 +12,7 @@ public class UnivaluedTree {
 		root.right.right = new TreeNode(1);
 		
 		UnivaluedTree uniTree = new UnivaluedTree();
-		boolean res = uniTree.isUnivalTree(root);
+		boolean res = uniTree.isUnivalued(root);
 		System.out.println(res);
 	}
 	
@@ -30,4 +30,17 @@ public class UnivaluedTree {
     	return helper(node.left, node.val) && helper(node.right, node.val);
     }
     
+    public boolean isUnivalued(TreeNode root) {
+    	return traverse(root, root.val);
+    }
+    
+    private boolean traverse(TreeNode node, int val) {
+    	if (node == null) {
+    		return true;
+    	}
+    	if (node.val != val) {
+    		return false;
+    	}
+    	return traverse(node.left, node.val) && traverse(node.right, node.val);
+    }
 }
