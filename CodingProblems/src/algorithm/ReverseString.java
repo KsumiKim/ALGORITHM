@@ -5,11 +5,12 @@ public class ReverseString {
 	public static void main(String[] args) {
 		char[] hello = {'h', 'e', 'l', 'l', 'o'};
 		char[] hannah = {'h', 'a', 'n', 'n', 'a', 'H'};
+		char[] hannah2 = {'H', 'a', 'n', 'n', 'a', 'h'};
 		
-		reverseString(hannah);
+		reverse(hannah2);
 		
-		for (int i = 0; i < hannah.length; i++) {
-			System.out.print(hannah[i]);
+		for (int i = 0; i < hannah2.length; i++) {
+			System.out.print(hannah2[i]);
 		}
 		
 	}
@@ -45,5 +46,18 @@ public class ReverseString {
 		inputWords[end--] = temp;
 		
 		helper(inputWords, start, end);
+	}
+
+	
+	public static void reverse(char[] s) {
+		int start = 0, end = s.length - 1;
+		
+		while (start < end) {
+			char temp = s[start];
+			s[start] = s[end];
+			s[end] = temp;
+			start++;
+			end--;
+		}
 	}
 }
