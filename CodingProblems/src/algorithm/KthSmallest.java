@@ -56,7 +56,7 @@ public class KthSmallest {
     	list.add(node.val);
     	helper2(node.right, k, list);
     }
-    
+   
     static int count = 0;
     static int res = -1;
     
