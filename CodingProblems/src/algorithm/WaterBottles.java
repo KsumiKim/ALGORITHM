@@ -4,7 +4,7 @@ public class WaterBottles {
 	
 	public static void main(String[] args) {
 		int numBottles = 15, numExchange = 8;
-		int res = numWaterBottles(numBottles, numExchange);
+		int res = numWaterBottles2(numBottles, numExchange);
 		System.out.println(res);
 	}
 	
@@ -28,4 +28,18 @@ public class WaterBottles {
     	}
     	return res;
     }
+    
+    public static int numWaterBottles2(int numBottles, int numExchange) {
+        int emptyBottles = 0, fullBottles = numBottles;
+        
+        while (numBottles >= numExchange) {
+        	emptyBottles = numBottles % numExchange;
+        	numBottles = numBottles / numExchange;
+        	
+        	fullBottles += numBottles;
+        	numBottles += emptyBottles;
+        }
+    	return fullBottles;
+    }
+    
 }
