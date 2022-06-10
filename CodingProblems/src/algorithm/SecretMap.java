@@ -28,7 +28,6 @@ public class SecretMap {
         return answer;
     }
     
-    
     private static String lpad(int n, String strNumber) {
     	int padCount = n - strNumber.length();
     	StringBuilder sb = new StringBuilder();
