@@ -7,10 +7,10 @@ public class ReverseString {
 		char[] hannah = {'h', 'a', 'n', 'n', 'a', 'H'};
 		char[] hannah2 = {'H', 'a', 'n', 'n', 'a', 'h'};
 		
-		reverse(hannah2);
+		reverse(hello);
 		
-		for (int i = 0; i < hannah2.length; i++) {
-			System.out.print(hannah2[i]);
+		for (char c : hello) {
+			System.out.print(c);
 		}
 		
 	}
@@ -50,14 +50,12 @@ public class ReverseString {
 
 	
 	public static void reverse(char[] s) {
-		int start = 0, end = s.length - 1;
 		
-		while (start < end) {
-			char temp = s[start];
-			s[start] = s[end];
-			s[end] = temp;
-			start++;
-			end--;
+		for (int i = 0; i < s.length / 2; i++) {
+			char temp = s[i];
+			s[i] = s[s.length - i - 1];
+			s[s.length - i - 1] = temp;
 		}
+		
 	}
 }
