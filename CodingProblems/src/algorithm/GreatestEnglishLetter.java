@@ -8,7 +8,7 @@ public class GreatestEnglishLetter {
 	public static void main(String[] args) {
 		String s = "lEeTcOdE";
 		String s2 = "arRAzFif";
-		
+		String s3 = "abcdzFiA";
 		
 		String res = greatestLetter(s2);
 		System.out.println(res);
@@ -19,7 +19,7 @@ public class GreatestEnglishLetter {
     	String letter = "";
     	
     	for (char c : s.toCharArray()) {
-    		if (c >= 97 && c <= 122) {
+    		if (c >= 'A' && c <= 'Z') {
     			set.add(c);
     		}
     	}
