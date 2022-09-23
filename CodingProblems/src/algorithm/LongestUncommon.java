@@ -16,9 +16,10 @@ public class LongestUncommon {
     	boolean common = false;
     	
     	for (int i = 0; i < a.length(); i++) {
-    		sb.append(a.charAt(i));
     		
-    		if (b.indexOf(sb.toString()) >= 0) {
+    		if (b.indexOf(sb.toString()) < 0) {
+        		sb.append(a.charAt(i));
+    		} else {
     			common = true;
     			break;
     		}
