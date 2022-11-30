@@ -6,7 +6,6 @@ public class PalindromeGame {
 		String s = "aaabbbb";
 		String s2 = "cdefghmnopqrstuvw";
 		String s3 = "cdcdcdcdeeeef";
-		
 		boolean res = isPalindrome(s3);
 		System.out.println(res);
 	}
