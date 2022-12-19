@@ -10,7 +10,15 @@ public class CircularRotation {
 		List<Integer> a = Arrays.asList(3, 4, 5);
 		int k = 2;
 		List<Integer> queries = Arrays.asList(1, 2);
-		
+
+		List<Integer> a2 = Arrays.asList(1, 2, 3, 4);
+		int k2 = 4;
+		List<Integer> queries2 = Arrays.asList(2, 3);
+
+		List<Integer> a3 = Arrays.asList(5, 6, 7, 8, 9);
+		int k3 = 3;
+		List<Integer> queries3 = Arrays.asList(3, 4);
+
 		List<Integer> res = circularArrayRotation(a, k, queries);
 		System.out.println(res);
 	}
