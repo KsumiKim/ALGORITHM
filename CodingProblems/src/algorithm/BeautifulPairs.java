@@ -9,7 +9,10 @@ public class BeautifulPairs {
 		List<Integer> A = Arrays.asList(1, 2, 3, 4);
 		List<Integer> B = Arrays.asList(1, 2, 3, 3);
 		
-		int res = beautifulPairs(A, B);
+		List<Integer> A2 = Arrays.asList(3, 5, 7, 11, 5, 8);
+		List<Integer> B2 = Arrays.asList(5, 7, 11, 10, 5, 8);
+		
+		int res = beautifulPairs(A2, B2);
 		System.out.println(res);
 	}
 
